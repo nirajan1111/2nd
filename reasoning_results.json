@@ -1,0 +1,108 @@
+[
+  {
+    "input": {
+      "clause_text": "The tenant must pay rent by the 5th of each month.",
+      "context": {
+        "Tenant": "PartyA",
+        "Landlord": "PartyB"
+      },
+      "compliance_case": {
+        "PartyA": {
+          "PayRentDate": 4
+        }
+      }
+    },
+    "fopl_rule": "x y x y x PayRent y due_date = 5",
+    "reasoning": {
+      "outcome": false,
+      "explanation": "❌ Compliance check FAILED: Conditions not met",
+      "proof_trace": [
+        "Checking predicate: x y x y x PayRent y due_date = 5",
+        "  ✗ No matching facts found"
+      ],
+      "satisfied_rules": [],
+      "violated_rules": [
+        "x y x y x PayRent y due_date = 5"
+      ]
+    }
+  },
+  {
+    "input": {
+      "clause_text": "The tenant must pay rent by the 5th of each month.",
+      "context": {
+        "Tenant": "PartyA",
+        "Landlord": "PartyB"
+      },
+      "compliance_case": {
+        "PartyA": {
+          "PayRentDate": 10
+        }
+      }
+    },
+    "fopl_rule": "x y x y x PayRent y due_date = 5",
+    "reasoning": {
+      "outcome": false,
+      "explanation": "❌ Compliance check FAILED: Conditions not met",
+      "proof_trace": [
+        "Checking predicate: x y x y x PayRent y due_date = 5",
+        "  ✗ No matching facts found"
+      ],
+      "satisfied_rules": [],
+      "violated_rules": [
+        "x y x y x PayRent y due_date = 5"
+      ]
+    }
+  },
+  {
+    "input": {
+      "clause_text": "Either party may terminate with 30 days written notice.",
+      "context": {
+        "Party": "PartyA"
+      },
+      "compliance_case": {
+        "PartyA": {
+          "NoticeGiven": 45
+        }
+      }
+    },
+    "fopl_rule": "x Party x Can x notice_days >= 30",
+    "reasoning": {
+      "outcome": false,
+      "explanation": "❌ Compliance check FAILED: Conditions not met",
+      "proof_trace": [
+        "Checking predicate: x Party x Can x notice_days >= 30",
+        "  ✗ No matching facts found"
+      ],
+      "satisfied_rules": [],
+      "violated_rules": [
+        "x Party x Can x notice_days >= 30"
+      ]
+    }
+  },
+  {
+    "input": {
+      "clause_text": "The supplier must deliver goods within 10 business days.",
+      "context": {
+        "Supplier": "CompanyX"
+      },
+      "compliance_case": {
+        "CompanyX": {
+          "DeliveryDays": 8
+        }
+      }
+    },
+    "fopl_rule": "x x Goods x days = 10",
+    "reasoning": {
+      "outcome": false,
+      "explanation": "❌ Compliance check FAILED: Conditions not met",
+      "proof_trace": [
+        "Checking predicate: x x Goods x days = 10",
+        "  ✗ No matching facts found"
+      ],
+      "satisfied_rules": [],
+      "violated_rules": [
+        "x x Goods x days = 10"
+      ]
+    }
+  }
+]

@@ -20,18 +20,17 @@ class NeuralLegalParser(nn.Module):
         self.tokenizer = T5Tokenizer.from_pretrained(model_name)
         self.model = T5ForConditionalGeneration.from_pretrained(model_name)
         
-        # Add special tokens for FOPL
-        special_tokens = {
-            'additional_special_tokens': [
-                'forall', 'exists', '&', '|', '~', '->', '<->', 
-                '(', ')', ',', '[', ']',
-                'Tenant', 'Landlord', 'Buyer', 'Seller', 'Employee', 
-                'Contractor', 'Supplier', 'Client',
-                'PayRent', 'Terminate', 'Maintain', 'Deliver',
-                'Liable', 'Indemnify', 'Warranty'
-            ]
-        }
-        self.tokenizer.add_special_tokens(special_tokens)
+        # Add custom tokens for FOPL (as regular tokens, not special tokens)
+        new_tokens = [
+            'forall', 'exists', '&', '|', '~', '->', '<->', '<=', '>=', '!=',
+            '(', ')', ',', '[', ']',
+            'Tenant', 'Landlord', 'Buyer', 'Seller', 'Employee', 
+            'Contractor', 'Supplier', 'Client',
+            'PayRent', 'Terminate', 'Maintain', 'Deliver',
+            'Liable', 'Indemnify', 'Warranty'
+        ]
+        # Add tokens to vocabulary (not as special tokens!)
+        num_added = self.tokenizer.add_tokens(new_tokens)
         self.model.resize_token_embeddings(len(self.tokenizer))
         
         print(f"✅ Loaded {model_name} with {len(self.tokenizer)} tokens")
@@ -108,8 +107,10 @@ class NeuralLegalParser(nn.Module):
                 do_sample=False
             )
         
-        # Decode
-        fopl_output = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+        # Decode (keep special tokens to preserve FOPL structure)
+        fopl_output = self.tokenizer.decode(outputs[0], skip_special_tokens=False)
+        # Clean up extra tokens (</s>, <pad>)
+        fopl_output = fopl_output.replace('</s>', '').replace('<pad>', '').strip()
         
         return fopl_output
     
@@ -154,9 +155,9 @@ class NeuralLegalParser(nn.Module):
                     early_stopping=True
                 )
             
-            # Decode
+            # Decode (keep special tokens to preserve FOPL structure)
             batch_results = [
-                self.tokenizer.decode(out, skip_special_tokens=True)
+                self.tokenizer.decode(out, skip_special_tokens=False).replace('</s>', '').replace('<pad>', '').strip()
                 for out in outputs
             ]
             results.extend(batch_results)

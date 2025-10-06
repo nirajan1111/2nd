@@ -149,14 +149,14 @@ class Trainer:
                 
                 # Decode predictions and references
                 preds = self.model.tokenizer.batch_decode(
-                    generated, skip_special_tokens=True
+                    generated, skip_special_tokens=False
                 )
                 
                 # Replace -100 with pad_token_id before decoding
                 labels_for_decode = labels.clone()
                 labels_for_decode[labels_for_decode == -100] = self.model.tokenizer.pad_token_id
                 refs = self.model.tokenizer.batch_decode(
-                    labels_for_decode, skip_special_tokens=True
+                    labels_for_decode, skip_special_tokens=False
                 )
                 
                 predictions.extend(preds)
@@ -357,13 +357,15 @@ def evaluate_model(model: NeuralLegalParser, test_loader: DataLoader,
                 num_beams=4
             )
             
-            # Decode
-            preds = model.tokenizer.batch_decode(generated, skip_special_tokens=True)
+            # Decode (keep special tokens to preserve FOPL structure)
+            preds = model.tokenizer.batch_decode(generated, skip_special_tokens=False)
+            preds = [p.replace('</s>', '').replace('<pad>', '').strip() for p in preds]
             
             # Replace -100 with pad_token_id before decoding
             labels_for_decode = labels.clone()
             labels_for_decode[labels_for_decode == -100] = model.tokenizer.pad_token_id
-            refs = model.tokenizer.batch_decode(labels_for_decode, skip_special_tokens=True)
+            refs = model.tokenizer.batch_decode(labels_for_decode, skip_special_tokens=False)
+            refs = [r.replace('</s>', '').replace('<pad>', '').strip() for r in refs]
             
             predictions.extend(preds)
             references.extend(refs)
