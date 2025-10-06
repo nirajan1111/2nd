@@ -21,17 +21,35 @@ class NeuralLegalParser(nn.Module):
         self.model = T5ForConditionalGeneration.from_pretrained(model_name)
         
         # Add custom tokens for FOPL (as regular tokens, not special tokens)
-        new_tokens = [
+        fopl_operators = [
             'forall', 'exists', '&', '|', '~', '->', '<->', '<=', '>=', '!=',
-            '(', ')', ',', '[', ']',
-            'Tenant', 'Landlord', 'Buyer', 'Seller', 'Employee', 
-            'Contractor', 'Supplier', 'Client',
-            'PayRent', 'Terminate', 'Maintain', 'Deliver',
-            'Liable', 'Indemnify', 'Warranty'
+            '(', ')', ',', '[', ']'
         ]
+        
+        # Load all predicates from dataset
+        import os
+        predicates_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'predicates.txt')
+        if os.path.exists(predicates_path):
+            with open(predicates_path, 'r') as f:
+                predicates = [line.strip() for line in f if line.strip()]
+            print(f"📚 Loaded {len(predicates)} predicates from predicates.txt")
+        else:
+            # Fallback to basic set if file doesn't exist
+            predicates = [
+                'Tenant', 'Landlord', 'Buyer', 'Seller', 'Employee', 
+                'Contractor', 'Supplier', 'Client', 'Party', 'Contract',
+                'PayRent', 'Terminate', 'Maintain', 'Deliver',
+                'Liable', 'Indemnify', 'Warranty'
+            ]
+            print(f"⚠️ predicates.txt not found, using {len(predicates)} basic predicates")
+        
+        # Combine all new tokens
+        new_tokens = fopl_operators + predicates
+        
         # Add tokens to vocabulary (not as special tokens!)
         num_added = self.tokenizer.add_tokens(new_tokens)
         self.model.resize_token_embeddings(len(self.tokenizer))
+        print(f"✅ Added {num_added} new tokens to vocabulary")
         
         print(f"✅ Loaded {model_name} with {len(self.tokenizer)} tokens")
     

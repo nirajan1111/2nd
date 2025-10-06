@@ -12,18 +12,23 @@
         }
       }
     },
-    "fopl_rule": "x y x y x PayRent y due_date = 5",
+    "fopl_rule": "forall x , y ( forall ( x ) & forall ( y ) -> forall ( x , due_date <= 5 ) )",
     "reasoning": {
-      "outcome": false,
-      "explanation": "❌ Compliance check FAILED: Conditions not met",
+      "outcome": true,
+      "explanation": "✅ Compliance check PASSED: All conditions satisfied",
       "proof_trace": [
-        "Checking predicate: x y x y x PayRent y due_date = 5",
-        "  ✗ No matching facts found"
+        "  Evaluating antecedent: Evaluating conjunction (AND):",
+        "  Evaluating antecedent:   Checking predicate: forall ( x )",
+        "  Evaluating antecedent:     ✗ No matching facts found",
+        "  Evaluating antecedent:   Checking predicate: forall ( y )",
+        "  Evaluating antecedent:     ✗ No matching facts found",
+        "  Evaluating antecedent:   → Conjunction result: False",
+        "  → Antecedent false, implication holds (vacuous truth)"
       ],
-      "satisfied_rules": [],
-      "violated_rules": [
-        "x y x y x PayRent y due_date = 5"
-      ]
+      "satisfied_rules": [
+        "forall x , y ( forall ( x ) & forall ( y ) -> forall ( x , due_date <= 5 ) )"
+      ],
+      "violated_rules": []
     }
   },
   {
@@ -39,18 +44,23 @@
         }
       }
     },
-    "fopl_rule": "x y x y x PayRent y due_date = 5",
+    "fopl_rule": "forall x , y ( forall ( x ) & forall ( y ) -> forall ( x , due_date <= 5 ) )",
     "reasoning": {
-      "outcome": false,
-      "explanation": "❌ Compliance check FAILED: Conditions not met",
+      "outcome": true,
+      "explanation": "✅ Compliance check PASSED: All conditions satisfied",
       "proof_trace": [
-        "Checking predicate: x y x y x PayRent y due_date = 5",
-        "  ✗ No matching facts found"
+        "  Evaluating antecedent: Evaluating conjunction (AND):",
+        "  Evaluating antecedent:   Checking predicate: forall ( x )",
+        "  Evaluating antecedent:     ✗ No matching facts found",
+        "  Evaluating antecedent:   Checking predicate: forall ( y )",
+        "  Evaluating antecedent:     ✗ No matching facts found",
+        "  Evaluating antecedent:   → Conjunction result: False",
+        "  → Antecedent false, implication holds (vacuous truth)"
       ],
-      "satisfied_rules": [],
-      "violated_rules": [
-        "x y x y x PayRent y due_date = 5"
-      ]
+      "satisfied_rules": [
+        "forall x , y ( forall ( x ) & forall ( y ) -> forall ( x , due_date <= 5 ) )"
+      ],
+      "violated_rules": []
     }
   },
   {
@@ -65,18 +75,19 @@
         }
       }
     },
-    "fopl_rule": "x Party x Can x notice_days >= 30",
+    "fopl_rule": "forall x ( Party ( x ) -> Can forall ( x , notice_days <= 30 ) )",
     "reasoning": {
-      "outcome": false,
-      "explanation": "❌ Compliance check FAILED: Conditions not met",
+      "outcome": true,
+      "explanation": "✅ Compliance check PASSED: All conditions satisfied",
       "proof_trace": [
-        "Checking predicate: x Party x Can x notice_days >= 30",
-        "  ✗ No matching facts found"
+        "  Evaluating antecedent: Checking predicate: Party ( x )",
+        "  Evaluating antecedent:   ✗ No matching facts found",
+        "  → Antecedent false, implication holds (vacuous truth)"
       ],
-      "satisfied_rules": [],
-      "violated_rules": [
-        "x Party x Can x notice_days >= 30"
-      ]
+      "satisfied_rules": [
+        "forall x ( Party ( x ) -> Can forall ( x , notice_days <= 30 ) )"
+      ],
+      "violated_rules": []
     }
   },
   {
@@ -91,18 +102,19 @@
         }
       }
     },
-    "fopl_rule": "x x Goods x days = 10",
+    "fopl_rule": "forall x ( forall ( x ) -> forall Goods ( x , days <= 10 ) )",
     "reasoning": {
-      "outcome": false,
-      "explanation": "❌ Compliance check FAILED: Conditions not met",
+      "outcome": true,
+      "explanation": "✅ Compliance check PASSED: All conditions satisfied",
       "proof_trace": [
-        "Checking predicate: x x Goods x days = 10",
-        "  ✗ No matching facts found"
+        "  Evaluating antecedent: Checking predicate: forall ( x )",
+        "  Evaluating antecedent:   ✗ No matching facts found",
+        "  → Antecedent false, implication holds (vacuous truth)"
       ],
-      "satisfied_rules": [],
-      "violated_rules": [
-        "x x Goods x days = 10"
-      ]
+      "satisfied_rules": [
+        "forall x ( forall ( x ) -> forall Goods ( x , days <= 10 ) )"
+      ],
+      "violated_rules": []
     }
   }
 ]
