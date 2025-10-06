@@ -207,7 +207,7 @@ Create a `config.json` file:
 ```json
 {
   "model_name": "t5-large",
-  "batch_size": 16,
+  "batch_size": 8,
   "num_epochs": 30,
   "learning_rate": 3e-5,
   "max_length": 512

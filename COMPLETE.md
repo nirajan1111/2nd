@@ -507,7 +507,7 @@ config = {
     'max_length': 512,
     
     # Training
-    'batch_size': 16,
+    'batch_size': 8,
     'num_epochs': 30,
     'learning_rate': 3e-5,
     'weight_decay': 0.01,
@@ -536,7 +536,7 @@ config = {
    - Expected: 70-85% exact match
 
 2. **GPU Training**
-   - Use larger batch size (16-32)
+   - Use larger batch size (8-32)
    - Enable mixed precision training
    - Faster training time
 

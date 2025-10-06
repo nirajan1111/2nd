@@ -265,7 +265,7 @@ def main(custom_config=None):
         'model_name': 't5-base',
         'data_path': 'data/legal_clauses.json',
         'output_dir': 'checkpoints',
-        'batch_size': 16,  # Change this value (default: 16)
+        'batch_size': 8,  # Change this value (default: 8)
         'num_epochs': 20,
         'learning_rate': 5e-5,
         'weight_decay': 0.01,
@@ -298,7 +298,7 @@ def main(custom_config=None):
     train_loader, val_loader, test_loader = create_dataloaders(
         data_path=config['data_path'],
         tokenizer=model.tokenizer,
-        batch_size=16,
+        batch_size=8,
         max_length=config['max_length'],
         num_workers=config['num_workers']
     )

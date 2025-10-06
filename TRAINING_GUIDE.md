@@ -21,7 +21,7 @@ Edit `training/train.py`, line ~263:
 
 ```python
 config = {
-    'batch_size': 16,    # ← Change this
+    'batch_size': 8,    # ← Change this
     'num_epochs': 20,    # ← Change this
     'learning_rate': 5e-5,
     # ... other params
@@ -52,11 +52,11 @@ python main.py train --config config.json
 | Hardware | Recommended Batch Size | Memory Usage |
 |----------|------------------------|--------------|
 | **CPU (your case)** | 4-8 | Low |
-| **GPU 8GB** | 16-32 | Medium |
-| **GPU 16GB+** | 32-64 | High |
+| **GPU 8GB** | 8-32 | Medium |
+| **GPU 8GB+** | 32-64 | High |
 
 ### Current Setup:
-- **Default**: 16 (optimized for CPU)
+- **Default**: 8 (optimized for CPU)
 - **Model**: T5-base (222M parameters)
 - **Device**: CPU (MPS not fully supported)
 
@@ -64,7 +64,7 @@ python main.py train --config config.json
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `batch_size` | 16 | Number of samples per batch |
+| `batch_size` | 8 | Number of samples per batch |
 | `num_epochs` | 20 | Training epochs |
 | `learning_rate` | 5e-5 | Learning rate for optimizer |
 | `weight_decay` | 0.01 | Weight decay (L2 regularization) |
@@ -120,7 +120,7 @@ Watch for:
 - **Epochs 1-5**: BLEU ~0-5%, Loss decreasing rapidly
 - **Epochs 6-10**: BLEU ~5-15%, Loss stabilizing
 - **Epochs 11-15**: BLEU ~15-30%, Refinement phase
-- **Epochs 16-20**: BLEU ~30-50%+, Convergence
+- **Epochs 8-20**: BLEU ~30-50%+, Convergence
 
 ## 🔧 Quick Examples
 
@@ -129,7 +129,7 @@ Watch for:
 python main.py train --batch-size 4 --epochs 5
 
 # Standard training (current default)
-python main.py train --batch-size 16 --epochs 20
+python main.py train --batch-size 8 --epochs 20
 
 # High-quality training (if you have time/resources)
 python main.py train --batch-size 8 --epochs 50
@@ -147,7 +147,7 @@ Models are saved to:
 ## 🎯 Current Setup (Default)
 
 ```
-Batch Size: 16
+Batch Size: 8
 Epochs: 20
 Learning Rate: 5e-5
 Device: CPU

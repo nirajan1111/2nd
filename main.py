@@ -256,7 +256,7 @@ Examples:
     )
     train_parser.add_argument(
         '--batch-size', '--batch_size', type=int, dest='batch_size',
-        help='Batch size for training (default: 16)'
+        help='Batch size for training (default: 8)'
     )
     train_parser.add_argument(
         '--epochs', type=int,

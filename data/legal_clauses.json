@@ -342,7 +342,7 @@
     "expected_outcome": false
   },
   {
-    "id": "clause_016",
+    "id": "clause_08",
     "clause_text": "Tenant shall perform routine maintenance every 12 months.",
     "context": {
       "Tenant": "PartyA"
