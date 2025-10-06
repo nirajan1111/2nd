@@ -979,6 +979,7 @@ class LegalClauseGenerator:
                                    param_values: Dict) -> tuple:
         """Generate a compliance test case based on clause type"""
         compliance_case = {}
+        expected_outcome = True  # Default value
         
         if template["type"] == "payment":
             party = list(context.values())[0]
@@ -991,15 +992,30 @@ class LegalClauseGenerator:
                 actual_amount = random.choice([param_values["amount"], param_values["amount"] - 1000])
                 compliance_case[party] = {"PaidAmount": actual_amount}
                 expected_outcome = actual_amount >= param_values["amount"]
+            else:
+                # Default payment case
+                compliance_case[party] = {"Compliant": random.choice([True, False])}
+                expected_outcome = compliance_case[party]["Compliant"]
                 
         elif template["type"] == "termination":
+            party = list(context.values())[0]
             if "days" in param_values:
-                party = list(context.values())[0]
                 notice_given = random.choice([15, 30, 45, 60, 90])
                 compliance_case[party] = {"NoticeGiven": notice_given}
                 expected_outcome = notice_given >= param_values["days"]
+            elif "weeks" in param_values:
+                notice_weeks = random.choice([1, 2, 3, 4, 8])
+                compliance_case[party] = {"NoticeWeeks": notice_weeks}
+                expected_outcome = notice_weeks >= param_values["weeks"]
+            elif "months" in param_values:
+                notice_months = random.choice([1, 2, 3, 6])
+                compliance_case[party] = {"NoticeMonths": notice_months}
+                expected_outcome = notice_months >= param_values["months"]
+            elif "years" in param_values:
+                duration_years = random.choice([1, 2, 3, 5])
+                compliance_case[party] = {"DurationYears": duration_years}
+                expected_outcome = duration_years >= param_values["years"]
             else:
-                party = list(context.values())[0]
                 compliance_case[party] = {"PaidRent": random.choice([True, False])}
                 expected_outcome = not compliance_case[party]["PaidRent"]
                 
@@ -1009,28 +1025,66 @@ class LegalClauseGenerator:
                 months_since = random.choice([2, 4, 6, 8, 12])
                 compliance_case[party] = {"MonthsSinceMaintenance": months_since}
                 expected_outcome = months_since <= param_values["months"]
+            elif "days" in param_values:
+                actual_days = random.choice([3, 7, 14, 20, 30])
+                compliance_case[party] = {"MaintenanceDays": actual_days}
+                expected_outcome = actual_days <= param_values["days"]
+            elif "amount" in param_values:
+                repair_cost = random.choice([50, 150, 300, 600, 1500])
+                compliance_case[party] = {"RepairCost": repair_cost}
+                expected_outcome = repair_cost <= param_values["amount"]
             else:
                 compliance_case[party] = {"PropertyCondition": random.choice(["habitable", "poor"])}
                 expected_outcome = compliance_case[party]["PropertyCondition"] == "habitable"
                 
-        elif template["type"] in ["access", "delivery", "warranty"]:
+        elif template["type"] in ["access", "delivery", "warranty", "liability", "confidentiality", 
+                                   "insurance", "penalty", "indemnification", "non_compete",
+                                   "intellectual_property", "dispute_resolution", "performance",
+                                   "renewal", "data_protection"]:
             party = list(context.values())[0]
-            param_key = list(param_values.keys())[0] if param_values else "default"
-            if param_key == "hours":
-                actual_hours = random.choice([12, 24, 48, 72])
-                compliance_case[party] = {"NoticeHours": actual_hours}
-                expected_outcome = actual_hours >= param_values["hours"]
-            elif param_key == "days":
-                actual_days = random.choice([3, 7, 14, 20, 30])
-                compliance_case[party] = {"DeliveryDays": actual_days}
-                expected_outcome = actual_days <= param_values["days"]
-            elif param_key == "months":
-                actual_months = random.choice([3, 6, 12, 24, 36])
-                compliance_case[party] = {"WarrantyMonths": actual_months}
-                expected_outcome = actual_months <= param_values["months"]
+            
+            if param_values:
+                param_key = list(param_values.keys())[0]
+                
+                if param_key == "hours":
+                    actual_hours = random.choice([12, 24, 48, 72])
+                    compliance_case[party] = {"Hours": actual_hours}
+                    expected_outcome = actual_hours >= param_values["hours"]
+                elif param_key == "days":
+                    actual_days = random.choice([3, 7, 14, 20, 30, 45, 60])
+                    compliance_case[party] = {"Days": actual_days}
+                    expected_outcome = actual_days <= param_values["days"]
+                elif param_key == "weeks":
+                    actual_weeks = random.choice([1, 2, 4, 6, 8])
+                    compliance_case[party] = {"Weeks": actual_weeks}
+                    expected_outcome = actual_weeks <= param_values["weeks"]
+                elif param_key == "months":
+                    actual_months = random.choice([3, 6, 12, 24, 36])
+                    compliance_case[party] = {"Months": actual_months}
+                    expected_outcome = actual_months <= param_values["months"]
+                elif param_key == "years":
+                    actual_years = random.choice([1, 2, 3, 5, 7])
+                    compliance_case[party] = {"Years": actual_years}
+                    expected_outcome = actual_years <= param_values["years"]
+                elif param_key == "amount":
+                    actual_amount = random.choice([5000, 10000, 50000, 100000, 500000])
+                    compliance_case[party] = {"Amount": actual_amount}
+                    expected_outcome = actual_amount >= param_values["amount"]
+                elif param_key == "percent":
+                    actual_percent = random.choice([5, 10, 20, 50, 100])
+                    compliance_case[party] = {"Percent": actual_percent}
+                    expected_outcome = actual_percent >= param_values["percent"]
+                else:
+                    # Unknown parameter type
+                    compliance_case[party] = {"Compliant": random.choice([True, False])}
+                    expected_outcome = compliance_case[party]["Compliant"]
+            else:
+                # No parameters
+                compliance_case[party] = {"Compliant": random.choice([True, False])}
+                expected_outcome = compliance_case[party]["Compliant"]
                 
         else:
-            # Default case
+            # Default case for any unhandled types
             party = list(context.values())[0]
             compliance_case[party] = {"Compliant": random.choice([True, False])}
             expected_outcome = compliance_case[party]["Compliant"]
