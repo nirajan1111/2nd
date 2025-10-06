@@ -257,7 +257,7 @@ class Trainer:
         print(f"✅ Training history saved to {history_path}")
 
 
-def main():
+def main(custom_config=None):
     """Main training script"""
     
     # Training configuration
@@ -265,7 +265,7 @@ def main():
         'model_name': 't5-base',
         'data_path': 'data/legal_clauses.json',
         'output_dir': 'checkpoints',
-        'batch_size': 8,
+        'batch_size': 16,  # Change this value (default: 16)
         'num_epochs': 20,
         'learning_rate': 5e-5,
         'weight_decay': 0.01,
@@ -276,6 +276,11 @@ def main():
         'save_interval': 5,
         'num_workers': 4
     }
+    
+    # Override with custom config if provided
+    if custom_config:
+        config.update(custom_config)
+        print(f"📝 Custom configuration applied: {custom_config}")
     
     # Create output directory
     os.makedirs(config['output_dir'], exist_ok=True)

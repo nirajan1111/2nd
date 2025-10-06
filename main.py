@@ -65,7 +65,17 @@ def train_model(args):
     
     # Import and run training
     from training.train import main as train_main
-    train_main()
+    
+    # Create custom config if batch_size provided
+    custom_config = {}
+    if hasattr(args, 'batch_size') and args.batch_size:
+        custom_config['batch_size'] = args.batch_size
+        print(f"📦 Using custom batch size: {args.batch_size}")
+    if hasattr(args, 'epochs') and args.epochs:
+        custom_config['num_epochs'] = args.epochs
+        print(f"🔄 Using custom epochs: {args.epochs}")
+    
+    train_main(custom_config if custom_config else None)
 
 
 def run_inference(args):
@@ -243,6 +253,14 @@ Examples:
     train_parser.add_argument(
         '--config', type=str,
         help='Path to training config JSON file'
+    )
+    train_parser.add_argument(
+        '--batch-size', type=int,
+        help='Batch size for training (default: 16)'
+    )
+    train_parser.add_argument(
+        '--epochs', type=int,
+        help='Number of training epochs (default: 20)'
     )
     
     # Inference command
