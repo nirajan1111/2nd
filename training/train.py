@@ -298,7 +298,7 @@ def main(custom_config=None):
     train_loader, val_loader, test_loader = create_dataloaders(
         data_path=config['data_path'],
         tokenizer=model.tokenizer,
-        batch_size=config['batch_size'],
+        batch_size=16,
         max_length=config['max_length'],
         num_workers=config['num_workers']
     )

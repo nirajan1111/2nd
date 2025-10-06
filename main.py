@@ -255,7 +255,7 @@ Examples:
         help='Path to training config JSON file'
     )
     train_parser.add_argument(
-        '--batch-size', type=int,
+        '--batch-size', '--batch_size', type=int, dest='batch_size',
         help='Batch size for training (default: 16)'
     )
     train_parser.add_argument(

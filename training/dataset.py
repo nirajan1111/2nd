@@ -113,7 +113,7 @@ def create_dataloaders(data_path: str, tokenizer: T5Tokenizer,
     
     train_loader = DataLoader(
         train_dataset,
-        batch_size=batch_size,
+        batch_size=16,
         shuffle=True,
         num_workers=num_workers,
         pin_memory=True
@@ -121,7 +121,7 @@ def create_dataloaders(data_path: str, tokenizer: T5Tokenizer,
     
     val_loader = DataLoader(
         val_dataset,
-        batch_size=batch_size,
+        batch_size=16,
         shuffle=False,
         num_workers=num_workers,
         pin_memory=True
@@ -129,7 +129,7 @@ def create_dataloaders(data_path: str, tokenizer: T5Tokenizer,
     
     test_loader = DataLoader(
         test_dataset,
-        batch_size=batch_size,
+        batch_size=16,
         shuffle=False,
         num_workers=num_workers,
         pin_memory=True
