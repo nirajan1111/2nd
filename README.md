@@ -78,19 +78,32 @@ pip install -r requirements.txt
 
 ### 2. Generate Dataset
 
-Generate 100 legal clause examples with FOPL annotations:
+Generate legal clause examples with FOPL annotations:
 
 ```bash
+# Quick test (100 samples)
 python main.py generate --num-samples 100
+
+# Production dataset (2000 samples) - RECOMMENDED
+python main.py generate --num-samples 2000
+
+# Extra large dataset (5000 samples)
+python main.py generate --num-samples 5000
 ```
 
-This creates `data/legal_clauses.json` with diverse legal clauses covering:
-- Payment obligations
-- Termination clauses
-- Maintenance requirements
-- Liability clauses
-- Confidentiality agreements
+This creates `data/legal_clauses.json` with **55+ diverse template types** covering:
+- Payment obligations (10 types)
+- Termination clauses (8 types)
+- Maintenance requirements (6 types)
+- Liability clauses (7 types)
+- Confidentiality agreements (6 types)
+- Insurance requirements (5 types)
+- Delivery obligations (7 types)
+- Penalty clauses (6 types)
+- Warranty terms (6 types)
 - And more...
+
+**Diversity**: 500+ unique clause variations prevent overfitting even with 2000+ samples!
 
 ### 3. Train the Model
 
