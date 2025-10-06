@@ -1,0 +1,2313 @@
+[
+  {
+    "id": "clause_001",
+    "clause_text": "The contractor indemnifies the client against third-party claims.",
+    "context": {
+      "Contractor": "Contractor1",
+      "Client": "Client1",
+      "Claim": "Claim1"
+    },
+    "fopl_rule": "forall x, y, z (Contractor(x) & Client(y) & ThirdPartyClaim(z) -> Indemnifies(x, y, z))",
+    "predicates_used": [
+      "Contractor(x)",
+      "Client(y)",
+      "ThirdPartyClaim(z)",
+      "Indemnifies(x, y, z)"
+    ],
+    "variables": {
+      "x": "Contractor",
+      "y": "Client",
+      "z": "Claim"
+    },
+    "clause_type": "indemnification",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_002",
+    "clause_text": "Either party may terminate with 90 days written notice.",
+    "context": {
+      "Party": "Party1"
+    },
+    "fopl_rule": "forall x (Party(x) -> CanTerminate(x, notice_days >= 90))",
+    "predicates_used": [
+      "Party(x)",
+      "CanTerminate(x, days)"
+    ],
+    "variables": {
+      "x": "Party"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "Party1": {
+        "NoticeGiven": 30
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_003",
+    "clause_text": "The product is warranted for 36 months from purchase date.",
+    "context": {
+      "Product": "Product1"
+    },
+    "fopl_rule": "forall x (Product(x) -> Warranty(x, duration=36))",
+    "predicates_used": [
+      "Product(x)",
+      "Warranty(x, duration)"
+    ],
+    "variables": {
+      "x": "Product"
+    },
+    "clause_type": "warranty",
+    "compliance_case": {
+      "Product1": {
+        "WarrantyMonths": 12
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_004",
+    "clause_text": "Landlord may enter property with 48 hours notice for repairs.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> CanEnter(x, notice_hours >= 48, reason=repairs))",
+    "predicates_used": [
+      "Landlord(x)",
+      "CanEnter(x, notice, reason)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "access",
+    "compliance_case": {
+      "PartyA": {
+        "NoticeHours": 72
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_005",
+    "clause_text": "Tenant shall perform routine maintenance every 3 months.",
+    "context": {
+      "Tenant": "PartyA"
+    },
+    "fopl_rule": "forall x (Tenant(x) -> PerformMaintenance(x, frequency <= 3))",
+    "predicates_used": [
+      "Tenant(x)",
+      "PerformMaintenance(x, frequency)"
+    ],
+    "variables": {
+      "x": "Tenant"
+    },
+    "clause_type": "maintenance",
+    "compliance_case": {
+      "PartyA": {
+        "MonthsSinceMaintenance": 8
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_006",
+    "clause_text": "The contractor must maintain insurance coverage of at least 1000000 USD.",
+    "context": {
+      "Contractor": "Contractor1"
+    },
+    "fopl_rule": "forall x (Contractor(x) -> HasInsurance(x, coverage >= 1000000))",
+    "predicates_used": [
+      "Contractor(x)",
+      "HasInsurance(x, coverage)"
+    ],
+    "variables": {
+      "x": "Contractor"
+    },
+    "clause_type": "insurance",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_007",
+    "clause_text": "The product is warranted for 24 months from purchase date.",
+    "context": {
+      "Product": "Product1"
+    },
+    "fopl_rule": "forall x (Product(x) -> Warranty(x, duration=24))",
+    "predicates_used": [
+      "Product(x)",
+      "Warranty(x, duration)"
+    ],
+    "variables": {
+      "x": "Product"
+    },
+    "clause_type": "warranty",
+    "compliance_case": {
+      "Product1": {
+        "WarrantyMonths": 6
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_008",
+    "clause_text": "Tenant shall perform routine maintenance every 3 months.",
+    "context": {
+      "Tenant": "PartyA"
+    },
+    "fopl_rule": "forall x (Tenant(x) -> PerformMaintenance(x, frequency <= 3))",
+    "predicates_used": [
+      "Tenant(x)",
+      "PerformMaintenance(x, frequency)"
+    ],
+    "variables": {
+      "x": "Tenant"
+    },
+    "clause_type": "maintenance",
+    "compliance_case": {
+      "PartyA": {
+        "MonthsSinceMaintenance": 12
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_009",
+    "clause_text": "Late payment incurs a penalty of 2% per month.",
+    "context": {
+      "Payment": "Payment1"
+    },
+    "fopl_rule": "forall x (LatePayment(x) -> Penalty(x, rate=2))",
+    "predicates_used": [
+      "LatePayment(x)",
+      "Penalty(x, rate)"
+    ],
+    "variables": {
+      "x": "Payment"
+    },
+    "clause_type": "penalty",
+    "compliance_case": {
+      "Payment1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_010",
+    "clause_text": "The contractor indemnifies the client against third-party claims.",
+    "context": {
+      "Contractor": "Contractor1",
+      "Client": "Client1",
+      "Claim": "Claim1"
+    },
+    "fopl_rule": "forall x, y, z (Contractor(x) & Client(y) & ThirdPartyClaim(z) -> Indemnifies(x, y, z))",
+    "predicates_used": [
+      "Contractor(x)",
+      "Client(y)",
+      "ThirdPartyClaim(z)",
+      "Indemnifies(x, y, z)"
+    ],
+    "variables": {
+      "x": "Contractor",
+      "y": "Client",
+      "z": "Claim"
+    },
+    "clause_type": "indemnification",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_011",
+    "clause_text": "The product is warranted for 12 months from purchase date.",
+    "context": {
+      "Product": "Product1"
+    },
+    "fopl_rule": "forall x (Product(x) -> Warranty(x, duration=12))",
+    "predicates_used": [
+      "Product(x)",
+      "Warranty(x, duration)"
+    ],
+    "variables": {
+      "x": "Product"
+    },
+    "clause_type": "warranty",
+    "compliance_case": {
+      "Product1": {
+        "WarrantyMonths": 3
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_012",
+    "clause_text": "The contractor must maintain insurance coverage of at least 100000 USD.",
+    "context": {
+      "Contractor": "Contractor1"
+    },
+    "fopl_rule": "forall x (Contractor(x) -> HasInsurance(x, coverage >= 100000))",
+    "predicates_used": [
+      "Contractor(x)",
+      "HasInsurance(x, coverage)"
+    ],
+    "variables": {
+      "x": "Contractor"
+    },
+    "clause_type": "insurance",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_013",
+    "clause_text": "The tenant must pay rent by the 1th of each month.",
+    "context": {
+      "Tenant": "PartyA"
+    },
+    "fopl_rule": "forall x (Tenant(x) -> PayRent(x, due_date <= 1))",
+    "predicates_used": [
+      "Tenant(x)",
+      "PayRent(x, date)"
+    ],
+    "variables": {
+      "x": "Tenant"
+    },
+    "clause_type": "payment",
+    "compliance_case": {
+      "PartyA": {
+        "PayRentDate": 6
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_014",
+    "clause_text": "Landlord may enter property with 24 hours notice for repairs.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> CanEnter(x, notice_hours >= 24, reason=repairs))",
+    "predicates_used": [
+      "Landlord(x)",
+      "CanEnter(x, notice, reason)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "access",
+    "compliance_case": {
+      "PartyA": {
+        "NoticeHours": 72
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_015",
+    "clause_text": "Landlord may enter property with 72 hours notice for repairs.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> CanEnter(x, notice_hours >= 72, reason=repairs))",
+    "predicates_used": [
+      "Landlord(x)",
+      "CanEnter(x, notice, reason)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "access",
+    "compliance_case": {
+      "PartyA": {
+        "NoticeHours": 48
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_016",
+    "clause_text": "Tenant shall perform routine maintenance every 12 months.",
+    "context": {
+      "Tenant": "PartyA"
+    },
+    "fopl_rule": "forall x (Tenant(x) -> PerformMaintenance(x, frequency <= 12))",
+    "predicates_used": [
+      "Tenant(x)",
+      "PerformMaintenance(x, frequency)"
+    ],
+    "variables": {
+      "x": "Tenant"
+    },
+    "clause_type": "maintenance",
+    "compliance_case": {
+      "PartyA": {
+        "MonthsSinceMaintenance": 4
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_017",
+    "clause_text": "The employee must not disclose confidential information for 2 years.",
+    "context": {
+      "Employee": "Employee1"
+    },
+    "fopl_rule": "forall x (Employee(x) -> ~Disclose(x, confidential_info, duration <= 2))",
+    "predicates_used": [
+      "Employee(x)",
+      "Disclose(x, info, duration)"
+    ],
+    "variables": {
+      "x": "Employee"
+    },
+    "clause_type": "confidentiality",
+    "compliance_case": {
+      "Employee1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_018",
+    "clause_text": "Landlord may enter property with 24 hours notice for repairs.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> CanEnter(x, notice_hours >= 24, reason=repairs))",
+    "predicates_used": [
+      "Landlord(x)",
+      "CanEnter(x, notice, reason)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "access",
+    "compliance_case": {
+      "PartyA": {
+        "NoticeHours": 48
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_019",
+    "clause_text": "The contractor indemnifies the client against third-party claims.",
+    "context": {
+      "Contractor": "Contractor1",
+      "Client": "Client1",
+      "Claim": "Claim1"
+    },
+    "fopl_rule": "forall x, y, z (Contractor(x) & Client(y) & ThirdPartyClaim(z) -> Indemnifies(x, y, z))",
+    "predicates_used": [
+      "Contractor(x)",
+      "Client(y)",
+      "ThirdPartyClaim(z)",
+      "Indemnifies(x, y, z)"
+    ],
+    "variables": {
+      "x": "Contractor",
+      "y": "Client",
+      "z": "Claim"
+    },
+    "clause_type": "indemnification",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_020",
+    "clause_text": "The contractor indemnifies the client against third-party claims.",
+    "context": {
+      "Contractor": "Contractor1",
+      "Client": "Client1",
+      "Claim": "Claim1"
+    },
+    "fopl_rule": "forall x, y, z (Contractor(x) & Client(y) & ThirdPartyClaim(z) -> Indemnifies(x, y, z))",
+    "predicates_used": [
+      "Contractor(x)",
+      "Client(y)",
+      "ThirdPartyClaim(z)",
+      "Indemnifies(x, y, z)"
+    ],
+    "variables": {
+      "x": "Contractor",
+      "y": "Client",
+      "z": "Claim"
+    },
+    "clause_type": "indemnification",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_021",
+    "clause_text": "Late payment incurs a penalty of 5% per month.",
+    "context": {
+      "Payment": "Payment1"
+    },
+    "fopl_rule": "forall x (LatePayment(x) -> Penalty(x, rate=5))",
+    "predicates_used": [
+      "LatePayment(x)",
+      "Penalty(x, rate)"
+    ],
+    "variables": {
+      "x": "Payment"
+    },
+    "clause_type": "penalty",
+    "compliance_case": {
+      "Payment1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_022",
+    "clause_text": "The contractor must maintain insurance coverage of at least 500000 USD.",
+    "context": {
+      "Contractor": "Contractor1"
+    },
+    "fopl_rule": "forall x (Contractor(x) -> HasInsurance(x, coverage >= 500000))",
+    "predicates_used": [
+      "Contractor(x)",
+      "HasInsurance(x, coverage)"
+    ],
+    "variables": {
+      "x": "Contractor"
+    },
+    "clause_type": "insurance",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_023",
+    "clause_text": "Late payment incurs a penalty of 5% per month.",
+    "context": {
+      "Payment": "Payment1"
+    },
+    "fopl_rule": "forall x (LatePayment(x) -> Penalty(x, rate=5))",
+    "predicates_used": [
+      "LatePayment(x)",
+      "Penalty(x, rate)"
+    ],
+    "variables": {
+      "x": "Payment"
+    },
+    "clause_type": "penalty",
+    "compliance_case": {
+      "Payment1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_024",
+    "clause_text": "The product is warranted for 6 months from purchase date.",
+    "context": {
+      "Product": "Product1"
+    },
+    "fopl_rule": "forall x (Product(x) -> Warranty(x, duration=6))",
+    "predicates_used": [
+      "Product(x)",
+      "Warranty(x, duration)"
+    ],
+    "variables": {
+      "x": "Product"
+    },
+    "clause_type": "warranty",
+    "compliance_case": {
+      "Product1": {
+        "WarrantyMonths": 24
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_025",
+    "clause_text": "Late payment incurs a penalty of 10% per month.",
+    "context": {
+      "Payment": "Payment1"
+    },
+    "fopl_rule": "forall x (LatePayment(x) -> Penalty(x, rate=10))",
+    "predicates_used": [
+      "LatePayment(x)",
+      "Penalty(x, rate)"
+    ],
+    "variables": {
+      "x": "Payment"
+    },
+    "clause_type": "penalty",
+    "compliance_case": {
+      "Payment1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_026",
+    "clause_text": "The buyer shall pay 10000 USD upon contract signing.",
+    "context": {
+      "Buyer": "PartyA"
+    },
+    "fopl_rule": "forall x (Buyer(x) -> PayAmount(x, 10000, event=signing))",
+    "predicates_used": [
+      "Buyer(x)",
+      "PayAmount(x, amount, event)"
+    ],
+    "variables": {
+      "x": "Buyer"
+    },
+    "clause_type": "payment",
+    "compliance_case": {
+      "PartyA": {
+        "PaidAmount": 9000
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_027",
+    "clause_text": "Either party may terminate with 60 days written notice.",
+    "context": {
+      "Party": "Party1"
+    },
+    "fopl_rule": "forall x (Party(x) -> CanTerminate(x, notice_days >= 60))",
+    "predicates_used": [
+      "Party(x)",
+      "CanTerminate(x, days)"
+    ],
+    "variables": {
+      "x": "Party"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "Party1": {
+        "NoticeGiven": 60
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_028",
+    "clause_text": "The contractor must maintain insurance coverage of at least 1000000 USD.",
+    "context": {
+      "Contractor": "Contractor1"
+    },
+    "fopl_rule": "forall x (Contractor(x) -> HasInsurance(x, coverage >= 1000000))",
+    "predicates_used": [
+      "Contractor(x)",
+      "HasInsurance(x, coverage)"
+    ],
+    "variables": {
+      "x": "Contractor"
+    },
+    "clause_type": "insurance",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_029",
+    "clause_text": "The tenant must pay rent by the 15th of each month.",
+    "context": {
+      "Tenant": "PartyA"
+    },
+    "fopl_rule": "forall x (Tenant(x) -> PayRent(x, due_date <= 15))",
+    "predicates_used": [
+      "Tenant(x)",
+      "PayRent(x, date)"
+    ],
+    "variables": {
+      "x": "Tenant"
+    },
+    "clause_type": "payment",
+    "compliance_case": {
+      "PartyA": {
+        "PayRentDate": 14
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_030",
+    "clause_text": "The contractor indemnifies the client against third-party claims.",
+    "context": {
+      "Contractor": "Contractor1",
+      "Client": "Client1",
+      "Claim": "Claim1"
+    },
+    "fopl_rule": "forall x, y, z (Contractor(x) & Client(y) & ThirdPartyClaim(z) -> Indemnifies(x, y, z))",
+    "predicates_used": [
+      "Contractor(x)",
+      "Client(y)",
+      "ThirdPartyClaim(z)",
+      "Indemnifies(x, y, z)"
+    ],
+    "variables": {
+      "x": "Contractor",
+      "y": "Client",
+      "z": "Claim"
+    },
+    "clause_type": "indemnification",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_031",
+    "clause_text": "The employee must not disclose confidential information for 5 years.",
+    "context": {
+      "Employee": "Employee1"
+    },
+    "fopl_rule": "forall x (Employee(x) -> ~Disclose(x, confidential_info, duration <= 5))",
+    "predicates_used": [
+      "Employee(x)",
+      "Disclose(x, info, duration)"
+    ],
+    "variables": {
+      "x": "Employee"
+    },
+    "clause_type": "confidentiality",
+    "compliance_case": {
+      "Employee1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_032",
+    "clause_text": "The contractor must maintain insurance coverage of at least 100000 USD.",
+    "context": {
+      "Contractor": "Contractor1"
+    },
+    "fopl_rule": "forall x (Contractor(x) -> HasInsurance(x, coverage >= 100000))",
+    "predicates_used": [
+      "Contractor(x)",
+      "HasInsurance(x, coverage)"
+    ],
+    "variables": {
+      "x": "Contractor"
+    },
+    "clause_type": "insurance",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_033",
+    "clause_text": "The landlord must maintain the property in habitable condition.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> MaintainProperty(x, condition=habitable))",
+    "predicates_used": [
+      "Landlord(x)",
+      "MaintainProperty(x, condition)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "maintenance",
+    "compliance_case": {
+      "PartyA": {
+        "PropertyCondition": "poor"
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_034",
+    "clause_text": "If tenant fails to pay rent, landlord may terminate lease.",
+    "context": {
+      "Tenant": "PartyA",
+      "Landlord": "PartyB"
+    },
+    "fopl_rule": "forall x, y (Tenant(x) & Landlord(y) & ~PayRent(x) -> RightToTerminate(y, x))",
+    "predicates_used": [
+      "Tenant(x)",
+      "Landlord(y)",
+      "PayRent(x)",
+      "RightToTerminate(y, x)"
+    ],
+    "variables": {
+      "x": "Tenant",
+      "y": "Landlord"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "PartyA": {
+        "PaidRent": false
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_035",
+    "clause_text": "The contractor indemnifies the client against third-party claims.",
+    "context": {
+      "Contractor": "Contractor1",
+      "Client": "Client1",
+      "Claim": "Claim1"
+    },
+    "fopl_rule": "forall x, y, z (Contractor(x) & Client(y) & ThirdPartyClaim(z) -> Indemnifies(x, y, z))",
+    "predicates_used": [
+      "Contractor(x)",
+      "Client(y)",
+      "ThirdPartyClaim(z)",
+      "Indemnifies(x, y, z)"
+    ],
+    "variables": {
+      "x": "Contractor",
+      "y": "Client",
+      "z": "Claim"
+    },
+    "clause_type": "indemnification",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_036",
+    "clause_text": "Late payment incurs a penalty of 1% per month.",
+    "context": {
+      "Payment": "Payment1"
+    },
+    "fopl_rule": "forall x (LatePayment(x) -> Penalty(x, rate=1))",
+    "predicates_used": [
+      "LatePayment(x)",
+      "Penalty(x, rate)"
+    ],
+    "variables": {
+      "x": "Payment"
+    },
+    "clause_type": "penalty",
+    "compliance_case": {
+      "Payment1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_037",
+    "clause_text": "Tenant shall perform routine maintenance every 12 months.",
+    "context": {
+      "Tenant": "PartyA"
+    },
+    "fopl_rule": "forall x (Tenant(x) -> PerformMaintenance(x, frequency <= 12))",
+    "predicates_used": [
+      "Tenant(x)",
+      "PerformMaintenance(x, frequency)"
+    ],
+    "variables": {
+      "x": "Tenant"
+    },
+    "clause_type": "maintenance",
+    "compliance_case": {
+      "PartyA": {
+        "MonthsSinceMaintenance": 4
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_038",
+    "clause_text": "The landlord must maintain the property in habitable condition.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> MaintainProperty(x, condition=habitable))",
+    "predicates_used": [
+      "Landlord(x)",
+      "MaintainProperty(x, condition)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "maintenance",
+    "compliance_case": {
+      "PartyA": {
+        "PropertyCondition": "habitable"
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_039",
+    "clause_text": "The employee must not disclose confidential information for 3 years.",
+    "context": {
+      "Employee": "Employee1"
+    },
+    "fopl_rule": "forall x (Employee(x) -> ~Disclose(x, confidential_info, duration <= 3))",
+    "predicates_used": [
+      "Employee(x)",
+      "Disclose(x, info, duration)"
+    ],
+    "variables": {
+      "x": "Employee"
+    },
+    "clause_type": "confidentiality",
+    "compliance_case": {
+      "Employee1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_040",
+    "clause_text": "The tenant must pay rent by the 5th of each month.",
+    "context": {
+      "Tenant": "PartyA"
+    },
+    "fopl_rule": "forall x (Tenant(x) -> PayRent(x, due_date <= 5))",
+    "predicates_used": [
+      "Tenant(x)",
+      "PayRent(x, date)"
+    ],
+    "variables": {
+      "x": "Tenant"
+    },
+    "clause_type": "payment",
+    "compliance_case": {
+      "PartyA": {
+        "PayRentDate": 7
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_041",
+    "clause_text": "The seller is liable for defects discovered within 60 days.",
+    "context": {
+      "Seller": "PartyA",
+      "Defect": "Defect1"
+    },
+    "fopl_rule": "forall x, y (Seller(x) & Defect(y) & DiscoveredWithin(y, 60) -> Liable(x, y))",
+    "predicates_used": [
+      "Seller(x)",
+      "Defect(y)",
+      "DiscoveredWithin(y, days)",
+      "Liable(x, y)"
+    ],
+    "variables": {
+      "x": "Seller",
+      "y": "Defect"
+    },
+    "clause_type": "liability",
+    "compliance_case": {
+      "PartyA": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_042",
+    "clause_text": "The seller is liable for defects discovered within 180 days.",
+    "context": {
+      "Seller": "PartyA",
+      "Defect": "Defect1"
+    },
+    "fopl_rule": "forall x, y (Seller(x) & Defect(y) & DiscoveredWithin(y, 180) -> Liable(x, y))",
+    "predicates_used": [
+      "Seller(x)",
+      "Defect(y)",
+      "DiscoveredWithin(y, days)",
+      "Liable(x, y)"
+    ],
+    "variables": {
+      "x": "Seller",
+      "y": "Defect"
+    },
+    "clause_type": "liability",
+    "compliance_case": {
+      "PartyA": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_043",
+    "clause_text": "The seller is liable for defects discovered within 60 days.",
+    "context": {
+      "Seller": "PartyA",
+      "Defect": "Defect1"
+    },
+    "fopl_rule": "forall x, y (Seller(x) & Defect(y) & DiscoveredWithin(y, 60) -> Liable(x, y))",
+    "predicates_used": [
+      "Seller(x)",
+      "Defect(y)",
+      "DiscoveredWithin(y, days)",
+      "Liable(x, y)"
+    ],
+    "variables": {
+      "x": "Seller",
+      "y": "Defect"
+    },
+    "clause_type": "liability",
+    "compliance_case": {
+      "PartyA": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_044",
+    "clause_text": "The supplier must deliver goods within 15 business days.",
+    "context": {
+      "Supplier": "Supplier1"
+    },
+    "fopl_rule": "forall x (Supplier(x) -> DeliverGoods(x, days <= 15))",
+    "predicates_used": [
+      "Supplier(x)",
+      "DeliverGoods(x, days)"
+    ],
+    "variables": {
+      "x": "Supplier"
+    },
+    "clause_type": "delivery",
+    "compliance_case": {
+      "Supplier1": {
+        "DeliveryDays": 7
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_045",
+    "clause_text": "Landlord may enter property with 24 hours notice for repairs.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> CanEnter(x, notice_hours >= 24, reason=repairs))",
+    "predicates_used": [
+      "Landlord(x)",
+      "CanEnter(x, notice, reason)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "access",
+    "compliance_case": {
+      "PartyA": {
+        "NoticeHours": 12
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_046",
+    "clause_text": "The seller is liable for defects discovered within 30 days.",
+    "context": {
+      "Seller": "PartyA",
+      "Defect": "Defect1"
+    },
+    "fopl_rule": "forall x, y (Seller(x) & Defect(y) & DiscoveredWithin(y, 30) -> Liable(x, y))",
+    "predicates_used": [
+      "Seller(x)",
+      "Defect(y)",
+      "DiscoveredWithin(y, days)",
+      "Liable(x, y)"
+    ],
+    "variables": {
+      "x": "Seller",
+      "y": "Defect"
+    },
+    "clause_type": "liability",
+    "compliance_case": {
+      "PartyA": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_047",
+    "clause_text": "Employee agrees not to compete for 3 years after termination.",
+    "context": {
+      "Employee": "Employee1"
+    },
+    "fopl_rule": "forall x (Employee(x) & AfterTermination(x) -> ~Compete(x, duration <= 3))",
+    "predicates_used": [
+      "Employee(x)",
+      "AfterTermination(x)",
+      "Compete(x, duration)"
+    ],
+    "variables": {
+      "x": "Employee"
+    },
+    "clause_type": "non_compete",
+    "compliance_case": {
+      "Employee1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_048",
+    "clause_text": "The seller is liable for defects discovered within 30 days.",
+    "context": {
+      "Seller": "PartyA",
+      "Defect": "Defect1"
+    },
+    "fopl_rule": "forall x, y (Seller(x) & Defect(y) & DiscoveredWithin(y, 30) -> Liable(x, y))",
+    "predicates_used": [
+      "Seller(x)",
+      "Defect(y)",
+      "DiscoveredWithin(y, days)",
+      "Liable(x, y)"
+    ],
+    "variables": {
+      "x": "Seller",
+      "y": "Defect"
+    },
+    "clause_type": "liability",
+    "compliance_case": {
+      "PartyA": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_049",
+    "clause_text": "If tenant fails to pay rent, landlord may terminate lease.",
+    "context": {
+      "Tenant": "PartyA",
+      "Landlord": "PartyB"
+    },
+    "fopl_rule": "forall x, y (Tenant(x) & Landlord(y) & ~PayRent(x) -> RightToTerminate(y, x))",
+    "predicates_used": [
+      "Tenant(x)",
+      "Landlord(y)",
+      "PayRent(x)",
+      "RightToTerminate(y, x)"
+    ],
+    "variables": {
+      "x": "Tenant",
+      "y": "Landlord"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "PartyA": {
+        "PaidRent": false
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_050",
+    "clause_text": "The tenant must pay rent by the 5th of each month.",
+    "context": {
+      "Tenant": "PartyA"
+    },
+    "fopl_rule": "forall x (Tenant(x) -> PayRent(x, due_date <= 5))",
+    "predicates_used": [
+      "Tenant(x)",
+      "PayRent(x, date)"
+    ],
+    "variables": {
+      "x": "Tenant"
+    },
+    "clause_type": "payment",
+    "compliance_case": {
+      "PartyA": {
+        "PayRentDate": 8
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_051",
+    "clause_text": "Late payment incurs a penalty of 1% per month.",
+    "context": {
+      "Payment": "Payment1"
+    },
+    "fopl_rule": "forall x (LatePayment(x) -> Penalty(x, rate=1))",
+    "predicates_used": [
+      "LatePayment(x)",
+      "Penalty(x, rate)"
+    ],
+    "variables": {
+      "x": "Payment"
+    },
+    "clause_type": "penalty",
+    "compliance_case": {
+      "Payment1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_052",
+    "clause_text": "The seller is liable for defects discovered within 90 days.",
+    "context": {
+      "Seller": "PartyA",
+      "Defect": "Defect1"
+    },
+    "fopl_rule": "forall x, y (Seller(x) & Defect(y) & DiscoveredWithin(y, 90) -> Liable(x, y))",
+    "predicates_used": [
+      "Seller(x)",
+      "Defect(y)",
+      "DiscoveredWithin(y, days)",
+      "Liable(x, y)"
+    ],
+    "variables": {
+      "x": "Seller",
+      "y": "Defect"
+    },
+    "clause_type": "liability",
+    "compliance_case": {
+      "PartyA": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_053",
+    "clause_text": "Late payment incurs a penalty of 10% per month.",
+    "context": {
+      "Payment": "Payment1"
+    },
+    "fopl_rule": "forall x (LatePayment(x) -> Penalty(x, rate=10))",
+    "predicates_used": [
+      "LatePayment(x)",
+      "Penalty(x, rate)"
+    ],
+    "variables": {
+      "x": "Payment"
+    },
+    "clause_type": "penalty",
+    "compliance_case": {
+      "Payment1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_054",
+    "clause_text": "The product is warranted for 24 months from purchase date.",
+    "context": {
+      "Product": "Product1"
+    },
+    "fopl_rule": "forall x (Product(x) -> Warranty(x, duration=24))",
+    "predicates_used": [
+      "Product(x)",
+      "Warranty(x, duration)"
+    ],
+    "variables": {
+      "x": "Product"
+    },
+    "clause_type": "warranty",
+    "compliance_case": {
+      "Product1": {
+        "WarrantyMonths": 36
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_055",
+    "clause_text": "Tenant shall perform routine maintenance every 6 months.",
+    "context": {
+      "Tenant": "PartyA"
+    },
+    "fopl_rule": "forall x (Tenant(x) -> PerformMaintenance(x, frequency <= 6))",
+    "predicates_used": [
+      "Tenant(x)",
+      "PerformMaintenance(x, frequency)"
+    ],
+    "variables": {
+      "x": "Tenant"
+    },
+    "clause_type": "maintenance",
+    "compliance_case": {
+      "PartyA": {
+        "MonthsSinceMaintenance": 6
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_056",
+    "clause_text": "Either party may terminate with 90 days written notice.",
+    "context": {
+      "Party": "Party1"
+    },
+    "fopl_rule": "forall x (Party(x) -> CanTerminate(x, notice_days >= 90))",
+    "predicates_used": [
+      "Party(x)",
+      "CanTerminate(x, days)"
+    ],
+    "variables": {
+      "x": "Party"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "Party1": {
+        "NoticeGiven": 30
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_057",
+    "clause_text": "The landlord must maintain the property in habitable condition.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> MaintainProperty(x, condition=habitable))",
+    "predicates_used": [
+      "Landlord(x)",
+      "MaintainProperty(x, condition)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "maintenance",
+    "compliance_case": {
+      "PartyA": {
+        "PropertyCondition": "habitable"
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_058",
+    "clause_text": "Either party may terminate with 90 days written notice.",
+    "context": {
+      "Party": "Party1"
+    },
+    "fopl_rule": "forall x (Party(x) -> CanTerminate(x, notice_days >= 90))",
+    "predicates_used": [
+      "Party(x)",
+      "CanTerminate(x, days)"
+    ],
+    "variables": {
+      "x": "Party"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "Party1": {
+        "NoticeGiven": 90
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_059",
+    "clause_text": "The product is warranted for 36 months from purchase date.",
+    "context": {
+      "Product": "Product1"
+    },
+    "fopl_rule": "forall x (Product(x) -> Warranty(x, duration=36))",
+    "predicates_used": [
+      "Product(x)",
+      "Warranty(x, duration)"
+    ],
+    "variables": {
+      "x": "Product"
+    },
+    "clause_type": "warranty",
+    "compliance_case": {
+      "Product1": {
+        "WarrantyMonths": 24
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_060",
+    "clause_text": "Employee agrees not to compete for 2 years after termination.",
+    "context": {
+      "Employee": "Employee1"
+    },
+    "fopl_rule": "forall x (Employee(x) & AfterTermination(x) -> ~Compete(x, duration <= 2))",
+    "predicates_used": [
+      "Employee(x)",
+      "AfterTermination(x)",
+      "Compete(x, duration)"
+    ],
+    "variables": {
+      "x": "Employee"
+    },
+    "clause_type": "non_compete",
+    "compliance_case": {
+      "Employee1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_061",
+    "clause_text": "The supplier must deliver goods within 10 business days.",
+    "context": {
+      "Supplier": "Supplier1"
+    },
+    "fopl_rule": "forall x (Supplier(x) -> DeliverGoods(x, days <= 10))",
+    "predicates_used": [
+      "Supplier(x)",
+      "DeliverGoods(x, days)"
+    ],
+    "variables": {
+      "x": "Supplier"
+    },
+    "clause_type": "delivery",
+    "compliance_case": {
+      "Supplier1": {
+        "DeliveryDays": 20
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_062",
+    "clause_text": "Either party may terminate with 60 days written notice.",
+    "context": {
+      "Party": "Party1"
+    },
+    "fopl_rule": "forall x (Party(x) -> CanTerminate(x, notice_days >= 60))",
+    "predicates_used": [
+      "Party(x)",
+      "CanTerminate(x, days)"
+    ],
+    "variables": {
+      "x": "Party"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "Party1": {
+        "NoticeGiven": 15
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_063",
+    "clause_text": "The seller is liable for defects discovered within 90 days.",
+    "context": {
+      "Seller": "PartyA",
+      "Defect": "Defect1"
+    },
+    "fopl_rule": "forall x, y (Seller(x) & Defect(y) & DiscoveredWithin(y, 90) -> Liable(x, y))",
+    "predicates_used": [
+      "Seller(x)",
+      "Defect(y)",
+      "DiscoveredWithin(y, days)",
+      "Liable(x, y)"
+    ],
+    "variables": {
+      "x": "Seller",
+      "y": "Defect"
+    },
+    "clause_type": "liability",
+    "compliance_case": {
+      "PartyA": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_064",
+    "clause_text": "The product is warranted for 24 months from purchase date.",
+    "context": {
+      "Product": "Product1"
+    },
+    "fopl_rule": "forall x (Product(x) -> Warranty(x, duration=24))",
+    "predicates_used": [
+      "Product(x)",
+      "Warranty(x, duration)"
+    ],
+    "variables": {
+      "x": "Product"
+    },
+    "clause_type": "warranty",
+    "compliance_case": {
+      "Product1": {
+        "WarrantyMonths": 24
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_065",
+    "clause_text": "The contractor indemnifies the client against third-party claims.",
+    "context": {
+      "Contractor": "Contractor1",
+      "Client": "Client1",
+      "Claim": "Claim1"
+    },
+    "fopl_rule": "forall x, y, z (Contractor(x) & Client(y) & ThirdPartyClaim(z) -> Indemnifies(x, y, z))",
+    "predicates_used": [
+      "Contractor(x)",
+      "Client(y)",
+      "ThirdPartyClaim(z)",
+      "Indemnifies(x, y, z)"
+    ],
+    "variables": {
+      "x": "Contractor",
+      "y": "Client",
+      "z": "Claim"
+    },
+    "clause_type": "indemnification",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_066",
+    "clause_text": "The seller is liable for defects discovered within 30 days.",
+    "context": {
+      "Seller": "PartyA",
+      "Defect": "Defect1"
+    },
+    "fopl_rule": "forall x, y (Seller(x) & Defect(y) & DiscoveredWithin(y, 30) -> Liable(x, y))",
+    "predicates_used": [
+      "Seller(x)",
+      "Defect(y)",
+      "DiscoveredWithin(y, days)",
+      "Liable(x, y)"
+    ],
+    "variables": {
+      "x": "Seller",
+      "y": "Defect"
+    },
+    "clause_type": "liability",
+    "compliance_case": {
+      "PartyA": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_067",
+    "clause_text": "Either party may terminate with 90 days written notice.",
+    "context": {
+      "Party": "Party1"
+    },
+    "fopl_rule": "forall x (Party(x) -> CanTerminate(x, notice_days >= 90))",
+    "predicates_used": [
+      "Party(x)",
+      "CanTerminate(x, days)"
+    ],
+    "variables": {
+      "x": "Party"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "Party1": {
+        "NoticeGiven": 90
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_068",
+    "clause_text": "If tenant fails to pay rent, landlord may terminate lease.",
+    "context": {
+      "Tenant": "PartyA",
+      "Landlord": "PartyB"
+    },
+    "fopl_rule": "forall x, y (Tenant(x) & Landlord(y) & ~PayRent(x) -> RightToTerminate(y, x))",
+    "predicates_used": [
+      "Tenant(x)",
+      "Landlord(y)",
+      "PayRent(x)",
+      "RightToTerminate(y, x)"
+    ],
+    "variables": {
+      "x": "Tenant",
+      "y": "Landlord"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "PartyA": {
+        "PaidRent": true
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_069",
+    "clause_text": "Late payment incurs a penalty of 5% per month.",
+    "context": {
+      "Payment": "Payment1"
+    },
+    "fopl_rule": "forall x (LatePayment(x) -> Penalty(x, rate=5))",
+    "predicates_used": [
+      "LatePayment(x)",
+      "Penalty(x, rate)"
+    ],
+    "variables": {
+      "x": "Payment"
+    },
+    "clause_type": "penalty",
+    "compliance_case": {
+      "Payment1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_070",
+    "clause_text": "The contractor indemnifies the client against third-party claims.",
+    "context": {
+      "Contractor": "Contractor1",
+      "Client": "Client1",
+      "Claim": "Claim1"
+    },
+    "fopl_rule": "forall x, y, z (Contractor(x) & Client(y) & ThirdPartyClaim(z) -> Indemnifies(x, y, z))",
+    "predicates_used": [
+      "Contractor(x)",
+      "Client(y)",
+      "ThirdPartyClaim(z)",
+      "Indemnifies(x, y, z)"
+    ],
+    "variables": {
+      "x": "Contractor",
+      "y": "Client",
+      "z": "Claim"
+    },
+    "clause_type": "indemnification",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_071",
+    "clause_text": "The contractor indemnifies the client against third-party claims.",
+    "context": {
+      "Contractor": "Contractor1",
+      "Client": "Client1",
+      "Claim": "Claim1"
+    },
+    "fopl_rule": "forall x, y, z (Contractor(x) & Client(y) & ThirdPartyClaim(z) -> Indemnifies(x, y, z))",
+    "predicates_used": [
+      "Contractor(x)",
+      "Client(y)",
+      "ThirdPartyClaim(z)",
+      "Indemnifies(x, y, z)"
+    ],
+    "variables": {
+      "x": "Contractor",
+      "y": "Client",
+      "z": "Claim"
+    },
+    "clause_type": "indemnification",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_072",
+    "clause_text": "The product is warranted for 12 months from purchase date.",
+    "context": {
+      "Product": "Product1"
+    },
+    "fopl_rule": "forall x (Product(x) -> Warranty(x, duration=12))",
+    "predicates_used": [
+      "Product(x)",
+      "Warranty(x, duration)"
+    ],
+    "variables": {
+      "x": "Product"
+    },
+    "clause_type": "warranty",
+    "compliance_case": {
+      "Product1": {
+        "WarrantyMonths": 6
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_073",
+    "clause_text": "Landlord may enter property with 48 hours notice for repairs.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> CanEnter(x, notice_hours >= 48, reason=repairs))",
+    "predicates_used": [
+      "Landlord(x)",
+      "CanEnter(x, notice, reason)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "access",
+    "compliance_case": {
+      "PartyA": {
+        "NoticeHours": 72
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_074",
+    "clause_text": "Late payment incurs a penalty of 5% per month.",
+    "context": {
+      "Payment": "Payment1"
+    },
+    "fopl_rule": "forall x (LatePayment(x) -> Penalty(x, rate=5))",
+    "predicates_used": [
+      "LatePayment(x)",
+      "Penalty(x, rate)"
+    ],
+    "variables": {
+      "x": "Payment"
+    },
+    "clause_type": "penalty",
+    "compliance_case": {
+      "Payment1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_075",
+    "clause_text": "Either party may terminate with 60 days written notice.",
+    "context": {
+      "Party": "Party1"
+    },
+    "fopl_rule": "forall x (Party(x) -> CanTerminate(x, notice_days >= 60))",
+    "predicates_used": [
+      "Party(x)",
+      "CanTerminate(x, days)"
+    ],
+    "variables": {
+      "x": "Party"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "Party1": {
+        "NoticeGiven": 15
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_076",
+    "clause_text": "If tenant fails to pay rent, landlord may terminate lease.",
+    "context": {
+      "Tenant": "PartyA",
+      "Landlord": "PartyB"
+    },
+    "fopl_rule": "forall x, y (Tenant(x) & Landlord(y) & ~PayRent(x) -> RightToTerminate(y, x))",
+    "predicates_used": [
+      "Tenant(x)",
+      "Landlord(y)",
+      "PayRent(x)",
+      "RightToTerminate(y, x)"
+    ],
+    "variables": {
+      "x": "Tenant",
+      "y": "Landlord"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "PartyA": {
+        "PaidRent": false
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_077",
+    "clause_text": "The product is warranted for 12 months from purchase date.",
+    "context": {
+      "Product": "Product1"
+    },
+    "fopl_rule": "forall x (Product(x) -> Warranty(x, duration=12))",
+    "predicates_used": [
+      "Product(x)",
+      "Warranty(x, duration)"
+    ],
+    "variables": {
+      "x": "Product"
+    },
+    "clause_type": "warranty",
+    "compliance_case": {
+      "Product1": {
+        "WarrantyMonths": 6
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_078",
+    "clause_text": "The buyer shall pay 1000 USD upon contract signing.",
+    "context": {
+      "Buyer": "PartyA"
+    },
+    "fopl_rule": "forall x (Buyer(x) -> PayAmount(x, 1000, event=signing))",
+    "predicates_used": [
+      "Buyer(x)",
+      "PayAmount(x, amount, event)"
+    ],
+    "variables": {
+      "x": "Buyer"
+    },
+    "clause_type": "payment",
+    "compliance_case": {
+      "PartyA": {
+        "PaidAmount": 0
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_079",
+    "clause_text": "Late payment incurs a penalty of 1% per month.",
+    "context": {
+      "Payment": "Payment1"
+    },
+    "fopl_rule": "forall x (LatePayment(x) -> Penalty(x, rate=1))",
+    "predicates_used": [
+      "LatePayment(x)",
+      "Penalty(x, rate)"
+    ],
+    "variables": {
+      "x": "Payment"
+    },
+    "clause_type": "penalty",
+    "compliance_case": {
+      "Payment1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_080",
+    "clause_text": "Either party may terminate with 60 days written notice.",
+    "context": {
+      "Party": "Party1"
+    },
+    "fopl_rule": "forall x (Party(x) -> CanTerminate(x, notice_days >= 60))",
+    "predicates_used": [
+      "Party(x)",
+      "CanTerminate(x, days)"
+    ],
+    "variables": {
+      "x": "Party"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "Party1": {
+        "NoticeGiven": 30
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_081",
+    "clause_text": "Tenant shall perform routine maintenance every 3 months.",
+    "context": {
+      "Tenant": "PartyA"
+    },
+    "fopl_rule": "forall x (Tenant(x) -> PerformMaintenance(x, frequency <= 3))",
+    "predicates_used": [
+      "Tenant(x)",
+      "PerformMaintenance(x, frequency)"
+    ],
+    "variables": {
+      "x": "Tenant"
+    },
+    "clause_type": "maintenance",
+    "compliance_case": {
+      "PartyA": {
+        "MonthsSinceMaintenance": 12
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_082",
+    "clause_text": "The landlord must maintain the property in habitable condition.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> MaintainProperty(x, condition=habitable))",
+    "predicates_used": [
+      "Landlord(x)",
+      "MaintainProperty(x, condition)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "maintenance",
+    "compliance_case": {
+      "PartyA": {
+        "PropertyCondition": "habitable"
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_083",
+    "clause_text": "The supplier must deliver goods within 10 business days.",
+    "context": {
+      "Supplier": "Supplier1"
+    },
+    "fopl_rule": "forall x (Supplier(x) -> DeliverGoods(x, days <= 10))",
+    "predicates_used": [
+      "Supplier(x)",
+      "DeliverGoods(x, days)"
+    ],
+    "variables": {
+      "x": "Supplier"
+    },
+    "clause_type": "delivery",
+    "compliance_case": {
+      "Supplier1": {
+        "DeliveryDays": 3
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_084",
+    "clause_text": "Employee agrees not to compete for 3 years after termination.",
+    "context": {
+      "Employee": "Employee1"
+    },
+    "fopl_rule": "forall x (Employee(x) & AfterTermination(x) -> ~Compete(x, duration <= 3))",
+    "predicates_used": [
+      "Employee(x)",
+      "AfterTermination(x)",
+      "Compete(x, duration)"
+    ],
+    "variables": {
+      "x": "Employee"
+    },
+    "clause_type": "non_compete",
+    "compliance_case": {
+      "Employee1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_085",
+    "clause_text": "The tenant must pay rent by the 5th of each month.",
+    "context": {
+      "Tenant": "PartyA"
+    },
+    "fopl_rule": "forall x (Tenant(x) -> PayRent(x, due_date <= 5))",
+    "predicates_used": [
+      "Tenant(x)",
+      "PayRent(x, date)"
+    ],
+    "variables": {
+      "x": "Tenant"
+    },
+    "clause_type": "payment",
+    "compliance_case": {
+      "PartyA": {
+        "PayRentDate": 12
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_086",
+    "clause_text": "The product is warranted for 36 months from purchase date.",
+    "context": {
+      "Product": "Product1"
+    },
+    "fopl_rule": "forall x (Product(x) -> Warranty(x, duration=36))",
+    "predicates_used": [
+      "Product(x)",
+      "Warranty(x, duration)"
+    ],
+    "variables": {
+      "x": "Product"
+    },
+    "clause_type": "warranty",
+    "compliance_case": {
+      "Product1": {
+        "WarrantyMonths": 3
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_087",
+    "clause_text": "Landlord may enter property with 48 hours notice for repairs.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> CanEnter(x, notice_hours >= 48, reason=repairs))",
+    "predicates_used": [
+      "Landlord(x)",
+      "CanEnter(x, notice, reason)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "access",
+    "compliance_case": {
+      "PartyA": {
+        "NoticeHours": 48
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_088",
+    "clause_text": "The landlord must maintain the property in habitable condition.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> MaintainProperty(x, condition=habitable))",
+    "predicates_used": [
+      "Landlord(x)",
+      "MaintainProperty(x, condition)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "maintenance",
+    "compliance_case": {
+      "PartyA": {
+        "PropertyCondition": "habitable"
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_089",
+    "clause_text": "Tenant shall perform routine maintenance every 3 months.",
+    "context": {
+      "Tenant": "PartyA"
+    },
+    "fopl_rule": "forall x (Tenant(x) -> PerformMaintenance(x, frequency <= 3))",
+    "predicates_used": [
+      "Tenant(x)",
+      "PerformMaintenance(x, frequency)"
+    ],
+    "variables": {
+      "x": "Tenant"
+    },
+    "clause_type": "maintenance",
+    "compliance_case": {
+      "PartyA": {
+        "MonthsSinceMaintenance": 2
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_090",
+    "clause_text": "Late payment incurs a penalty of 1% per month.",
+    "context": {
+      "Payment": "Payment1"
+    },
+    "fopl_rule": "forall x (LatePayment(x) -> Penalty(x, rate=1))",
+    "predicates_used": [
+      "LatePayment(x)",
+      "Penalty(x, rate)"
+    ],
+    "variables": {
+      "x": "Payment"
+    },
+    "clause_type": "penalty",
+    "compliance_case": {
+      "Payment1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_091",
+    "clause_text": "The buyer shall pay 1000 USD upon contract signing.",
+    "context": {
+      "Buyer": "PartyA"
+    },
+    "fopl_rule": "forall x (Buyer(x) -> PayAmount(x, 1000, event=signing))",
+    "predicates_used": [
+      "Buyer(x)",
+      "PayAmount(x, amount, event)"
+    ],
+    "variables": {
+      "x": "Buyer"
+    },
+    "clause_type": "payment",
+    "compliance_case": {
+      "PartyA": {
+        "PaidAmount": 0
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_092",
+    "clause_text": "Landlord may enter property with 72 hours notice for repairs.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> CanEnter(x, notice_hours >= 72, reason=repairs))",
+    "predicates_used": [
+      "Landlord(x)",
+      "CanEnter(x, notice, reason)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "access",
+    "compliance_case": {
+      "PartyA": {
+        "NoticeHours": 24
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_093",
+    "clause_text": "The product is warranted for 36 months from purchase date.",
+    "context": {
+      "Product": "Product1"
+    },
+    "fopl_rule": "forall x (Product(x) -> Warranty(x, duration=36))",
+    "predicates_used": [
+      "Product(x)",
+      "Warranty(x, duration)"
+    ],
+    "variables": {
+      "x": "Product"
+    },
+    "clause_type": "warranty",
+    "compliance_case": {
+      "Product1": {
+        "WarrantyMonths": 12
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_094",
+    "clause_text": "The employee must not disclose confidential information for 3 years.",
+    "context": {
+      "Employee": "Employee1"
+    },
+    "fopl_rule": "forall x (Employee(x) -> ~Disclose(x, confidential_info, duration <= 3))",
+    "predicates_used": [
+      "Employee(x)",
+      "Disclose(x, info, duration)"
+    ],
+    "variables": {
+      "x": "Employee"
+    },
+    "clause_type": "confidentiality",
+    "compliance_case": {
+      "Employee1": {
+        "Compliant": true
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_095",
+    "clause_text": "Tenant shall perform routine maintenance every 6 months.",
+    "context": {
+      "Tenant": "PartyA"
+    },
+    "fopl_rule": "forall x (Tenant(x) -> PerformMaintenance(x, frequency <= 6))",
+    "predicates_used": [
+      "Tenant(x)",
+      "PerformMaintenance(x, frequency)"
+    ],
+    "variables": {
+      "x": "Tenant"
+    },
+    "clause_type": "maintenance",
+    "compliance_case": {
+      "PartyA": {
+        "MonthsSinceMaintenance": 2
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_096",
+    "clause_text": "Either party may terminate with 90 days written notice.",
+    "context": {
+      "Party": "Party1"
+    },
+    "fopl_rule": "forall x (Party(x) -> CanTerminate(x, notice_days >= 90))",
+    "predicates_used": [
+      "Party(x)",
+      "CanTerminate(x, days)"
+    ],
+    "variables": {
+      "x": "Party"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "Party1": {
+        "NoticeGiven": 15
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_097",
+    "clause_text": "Either party may terminate with 60 days written notice.",
+    "context": {
+      "Party": "Party1"
+    },
+    "fopl_rule": "forall x (Party(x) -> CanTerminate(x, notice_days >= 60))",
+    "predicates_used": [
+      "Party(x)",
+      "CanTerminate(x, days)"
+    ],
+    "variables": {
+      "x": "Party"
+    },
+    "clause_type": "termination",
+    "compliance_case": {
+      "Party1": {
+        "NoticeGiven": 30
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_098",
+    "clause_text": "The contractor indemnifies the client against third-party claims.",
+    "context": {
+      "Contractor": "Contractor1",
+      "Client": "Client1",
+      "Claim": "Claim1"
+    },
+    "fopl_rule": "forall x, y, z (Contractor(x) & Client(y) & ThirdPartyClaim(z) -> Indemnifies(x, y, z))",
+    "predicates_used": [
+      "Contractor(x)",
+      "Client(y)",
+      "ThirdPartyClaim(z)",
+      "Indemnifies(x, y, z)"
+    ],
+    "variables": {
+      "x": "Contractor",
+      "y": "Client",
+      "z": "Claim"
+    },
+    "clause_type": "indemnification",
+    "compliance_case": {
+      "Contractor1": {
+        "Compliant": false
+      }
+    },
+    "expected_outcome": false
+  },
+  {
+    "id": "clause_099",
+    "clause_text": "The buyer shall pay 5000 USD upon contract signing.",
+    "context": {
+      "Buyer": "PartyA"
+    },
+    "fopl_rule": "forall x (Buyer(x) -> PayAmount(x, 5000, event=signing))",
+    "predicates_used": [
+      "Buyer(x)",
+      "PayAmount(x, amount, event)"
+    ],
+    "variables": {
+      "x": "Buyer"
+    },
+    "clause_type": "payment",
+    "compliance_case": {
+      "PartyA": {
+        "PaidAmount": 5000
+      }
+    },
+    "expected_outcome": true
+  },
+  {
+    "id": "clause_100",
+    "clause_text": "Landlord may enter property with 48 hours notice for repairs.",
+    "context": {
+      "Landlord": "PartyA"
+    },
+    "fopl_rule": "forall x (Landlord(x) -> CanEnter(x, notice_hours >= 48, reason=repairs))",
+    "predicates_used": [
+      "Landlord(x)",
+      "CanEnter(x, notice, reason)"
+    ],
+    "variables": {
+      "x": "Landlord"
+    },
+    "clause_type": "access",
+    "compliance_case": {
+      "PartyA": {
+        "NoticeHours": 24
+      }
+    },
+    "expected_outcome": false
+  }
+]
