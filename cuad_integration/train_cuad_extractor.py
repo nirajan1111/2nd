@@ -15,6 +15,9 @@ from pathlib import Path
 from dataclasses import dataclass
 from typing import Dict, List
 
+# Disable HuggingFace Hub's chat template checking (causes 404 errors)
+os.environ['HF_HUB_DISABLE_TELEMETRY'] = '1'
+
 import torch
 from torch.utils.data import Dataset
 from transformers import (
@@ -69,6 +72,7 @@ class CUADTrainer:
         
         # Initialize tokenizer and model
         print(f"Loading {config.model_name} tokenizer and model...")
+        
         self.tokenizer = AutoTokenizer.from_pretrained(config.model_name)
         self.model = AutoModelForQuestionAnswering.from_pretrained(config.model_name)
         
