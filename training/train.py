@@ -262,7 +262,7 @@ def main(custom_config=None):
     
     # Training configuration
     config = {
-        'model_name': 't5-base',
+        'model_name': 'google/t5-v1_1-base',
         'data_path': 'data/legal_clauses.json',
         'output_dir': 'checkpoints',
         'batch_size': 8,  # Change this value (default: 8)
