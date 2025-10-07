@@ -52,23 +52,32 @@ class CUADClauseExtractor:
         "Notice Period To Terminate Renewal": "Highlight the parts (if any) of this contract related to \"Notice Period To Terminate Renewal\" that should be reviewed by a lawyer. Details: What is the notice period required to terminate renewal?",
     }
     
-    def __init__(self, model_path: str, max_length: int = 512, doc_stride: int = 128):
+    def __init__(self, model_path: str = "Rakib/roberta-base-on-cuad", max_length: int = 512, doc_stride: int = 128):
         """
         Initialize CUAD clause extractor.
         
         Args:
-            model_path: Path to trained model directory
+            model_path: Path to trained model directory OR HuggingFace model name
+                       Default: "Rakib/roberta-base-on-cuad" (pre-trained on CUAD)
             max_length: Maximum sequence length
             doc_stride: Stride for sliding window
         """
-        self.model_path = Path(model_path)
+        self.model_path = model_path
         self.max_length = max_length
         self.doc_stride = doc_stride
         
         # Load model and tokenizer
         print(f"Loading CUAD extraction model from {model_path}...")
-        self.tokenizer = AutoTokenizer.from_pretrained(str(self.model_path))
-        self.model = AutoModelForQuestionAnswering.from_pretrained(str(self.model_path))
+        
+        # Check if it's a local path or HuggingFace model
+        if Path(model_path).exists():
+            print("  → Loading from local path")
+            self.tokenizer = AutoTokenizer.from_pretrained(str(model_path))
+            self.model = AutoModelForQuestionAnswering.from_pretrained(str(model_path))
+        else:
+            print("  → Loading from HuggingFace Hub")
+            self.tokenizer = AutoTokenizer.from_pretrained(model_path)
+            self.model = AutoModelForQuestionAnswering.from_pretrained(model_path)
         
         # Move to GPU if available
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
