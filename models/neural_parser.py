@@ -10,7 +10,7 @@ class NeuralLegalParser(nn.Module):
     Converts natural language legal text to FOPL (First-Order Predicate Logic)
     """
     
-    def __init__(self, model_name: str = "t5-base", max_length: int = 512):
+    def __init__(self, model_name: str = "google/t5-v1_1-base", max_length: int = 512):
         super(NeuralLegalParser, self).__init__()
         
         self.model_name = model_name
@@ -56,9 +56,10 @@ class NeuralLegalParser(nn.Module):
     def preprocess_input(self, clause_text: str, context: Dict = None) -> str:
         """
         Preprocess legal clause text for T5 input
-        Format: "translate legal to logic: <clause> context: <entities>"
+        Format: "translate to english logic: <clause> context: <entities>"
         """
-        input_text = f"translate legal to logic: {clause_text}"
+        # Add "english" to prevent multilingual outputs
+        input_text = f"translate to english logic: {clause_text}"
         
         if context:
             context_str = " ".join([f"{k}={v}" for k, v in context.items()])

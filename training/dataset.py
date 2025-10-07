@@ -83,7 +83,8 @@ class LegalReasoningDataset(Dataset):
     
     def _prepare_input(self, item: Dict) -> str:
         """Prepare input text with task prefix and context"""
-        input_text = f"translate legal to logic: {item['clause_text']}"
+        # Add explicit language marker to prevent multilingual outputs
+        input_text = f"translate to english logic: {item['clause_text']}"
         
         if item.get('context'):
             context_str = " ".join([f"{k}={v}" for k, v in item['context'].items()])

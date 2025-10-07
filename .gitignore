@@ -3,3 +3,7 @@ checkpoints
 __pycache__/
 kaggle_checkpoint/
 new_kaggle_checkpoint/
+
+CUAD_v1/
+
+*.md
