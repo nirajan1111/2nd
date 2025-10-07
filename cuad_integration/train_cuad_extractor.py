@@ -243,8 +243,7 @@ class CUADTrainer:
         train_dataset = train_dataset.map(
             self.preprocess_function,
             batched=True,
-            batch_size=1000,  # Process in larger batches
-            num_proc=4,  # Use multiple processes
+            batch_size=100,  # Process in larger batches
             remove_columns=train_dataset.column_names,
             desc="Tokenizing train"
         )
@@ -252,8 +251,7 @@ class CUADTrainer:
         val_dataset = val_dataset.map(
             self.preprocess_function,
             batched=True,
-            batch_size=1000,  # Process in larger batches
-            num_proc=4,  # Use multiple processes
+            batch_size=100,  # Process in larger batches
             remove_columns=val_dataset.column_names,
             desc="Tokenizing validation"
         )
