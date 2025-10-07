@@ -263,7 +263,7 @@ class CUADTrainer:
         # Training arguments
         training_args = TrainingArguments(
             output_dir=str(self.output_dir),
-            eval_strategy="epoch",
+            evaluation_strategy="epoch",  # Changed from eval_strategy for compatibility
             save_strategy="epoch",
             learning_rate=self.config.learning_rate,
             per_device_train_batch_size=self.config.batch_size,
