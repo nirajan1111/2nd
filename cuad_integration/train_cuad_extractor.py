@@ -43,8 +43,8 @@ class CUADTrainingConfig:
     weight_decay: float = 0.01
     use_mps: bool = False  # Auto-detect MPS/CPU
     warmup_ratio: float = 0.1
-    fp16: bool = False  # Disable fp16 for CPU/MPS
-    gradient_accumulation_steps: int = 2
+    fp16: bool = False  # Disable fp16 for CPU/MPS (auto-enabled for CUDA)
+    gradient_accumulation_steps: int = 1  # Changed from 2 to 1 for faster training
 
 
 class CUADTrainer:
