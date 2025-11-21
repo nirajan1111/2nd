@@ -27,6 +27,7 @@ class ActionType(Enum):
     LICENSE = "license"
     ASSIGN = "assign"
     COMPETE = "compete"
+    PURCHASE = "purchase"
 
 
 @dataclass
@@ -69,20 +70,37 @@ class ActionParser:
         ],
         
         ActionType.PAY: [
-            (r"(\w+)\s+paid\s+(?:on|by|in)?\s*(?:the\s*)?(\d+)(?:th|st|nd|rd)?\s*(day|month)?",
+            # "paid on day 35" or "paid on the 35th day"
+            (r"(\w+)\s+paid\s+on\s+(?:day\s*)?(\d+)",
              lambda m: {"day": int(m.group(2))}),
             
+            # "paid by day 35" or "paid within 35 days"
+            (r"(\w+)\s+paid\s+(?:by|within)\s+(?:day\s*)?(\d+)\s*(?:days?)?",
+             lambda m: {"day": int(m.group(2))}),
+            
+            # "paid $5000" or "paid 5000"
             (r"(\w+)\s+paid\s+\$?(\d+(?:,\d+)?(?:\.\d+)?)",
              lambda m: {"amount": float(m.group(2).replace(',', ''))}),
             
+            # "failed to pay" or "did not pay"
             (r"(\w+)\s+(?:failed to pay|did not pay)",
              lambda m: {"status": "not_paid"}),
         ],
         
         ActionType.TERMINATE: [
-            (r"(\w+)\s+terminated\s+(?:the\s+)?(?:contract|agreement)\s*(?:with)?\s*(\d+)?\s*(days?|months?)?\s*(?:notice)?",
+            # "terminated with 60 days notice" or "terminated the agreement with 60 days notice"
+            (r"(\w+)\s+terminated\s+(?:the\s+)?(?:contract|agreement)?\s*with\s+(\d+)\s+days?\s+notice",
+             lambda m: {"notice_days": int(m.group(2))}),
+            
+            # "terminated upon 60 days notice"
+            (r"(\w+)\s+terminated\s+(?:upon|after|giving)\s+(\d+)\s+days?\s+notice",
+             lambda m: {"notice_days": int(m.group(2))}),
+            
+            # Generic termination with optional notice
+            (r"(\w+)\s+terminated\s+(?:the\s+)?(?:contract|agreement)\s*(?:with)?\s*(\d+)?\s*(?:days?)?\s*(?:notice)?",
              lambda m: {"notice_days": int(m.group(2)) if m.group(2) else 0}),
             
+            # "terminated without notice" or "terminated with no notice"
             (r"(\w+)\s+terminated\s+(?:without|with no)\s+notice",
              lambda m: {"notice_days": 0}),
         ],
@@ -125,6 +143,24 @@ class ActionParser:
             
             (r"(\w+)\s+entered\s+(?:the\s+)?market",
              lambda m: {"market_entry": True}),
+        ],
+        
+        ActionType.PURCHASE: [
+            # "purchased 800 units" or "bought 1000 units"
+            (r"(\w+)\s+(?:purchased|bought)\s+(\d+(?:,\d+)?)\s+units?",
+             lambda m: {"quantity": int(m.group(2).replace(',', ''))}),
+            
+            # "purchased goods" or "made a purchase"
+            (r"(\w+)\s+(?:purchased|bought)\s+(?:goods|products|items)",
+             lambda m: {"purchased": True}),
+            
+            # "purchased for $5000"
+            (r"(\w+)\s+(?:purchased|bought)\s+for\s+\$?(\d+(?:,\d+)?(?:\.\d+)?)",
+             lambda m: {"amount": float(m.group(2).replace(',', ''))}),
+            
+            # "failed to purchase" or "did not purchase"
+            (r"(\w+)\s+(?:failed to purchase|did not purchase|did not buy)",
+             lambda m: {"status": "not_purchased"}),
         ],
     }
     

@@ -51,22 +51,25 @@ def generate_data(args):
 
 
 def train_model(args):
-    """Train the neural parser"""
+    """Train the T5 FOPL model"""
     print("\n" + "="*60)
-    print("TRAINING NEURAL LEGAL PARSER")
+    print("TRAINING T5 FOPL MODEL")
     print("="*60 + "\n")
     
     # Check if data exists
-    data_path = os.path.join('data', 'legal_clauses.json')
+    from config import get_config
+    cfg = get_config()
+    
+    data_path = str(cfg.paths.legal_clauses)
     if not os.path.exists(data_path):
         print(f"❌ Dataset not found at {data_path}")
         print("   Please run: python main.py generate")
         return
     
-    # Import and run training
-    from training.train import main as train_main
+    # Import training module
+    from training.train_fopl import train_t5_fopl
     
-    # Create custom config if batch_size provided
+    # Create custom config
     custom_config = {}
     if hasattr(args, 'batch_size') and args.batch_size:
         custom_config['batch_size'] = args.batch_size
@@ -74,8 +77,18 @@ def train_model(args):
     if hasattr(args, 'epochs') and args.epochs:
         custom_config['num_epochs'] = args.epochs
         print(f"🔄 Using custom epochs: {args.epochs}")
+    if hasattr(args, 'lr') and args.lr:
+        custom_config['learning_rate'] = args.lr
+        print(f"📈 Using learning rate: {args.lr}")
     
-    train_main(custom_config if custom_config else None)
+    # Run training
+    try:
+        trainer, results = train_t5_fopl(custom_config=custom_config if custom_config else None)
+        print("\n✅ Training completed successfully!")
+    except Exception as e:
+        print(f"\n❌ Training failed: {e}")
+        import traceback
+        traceback.print_exc()
 
 
 def run_inference(args):
@@ -249,7 +262,7 @@ Examples:
     )
     
     # Train command
-    train_parser = subparsers.add_parser('train', help='Train the neural parser')
+    train_parser = subparsers.add_parser('train', help='Train the T5 FOPL model')
     train_parser.add_argument(
         '--config', type=str,
         help='Path to training config JSON file'
@@ -260,7 +273,11 @@ Examples:
     )
     train_parser.add_argument(
         '--epochs', type=int,
-        help='Number of training epochs (default: 20)'
+        help='Number of training epochs (default: 10)'
+    )
+    train_parser.add_argument(
+        '--lr', type=float,
+        help='Learning rate (default: 5e-5)'
     )
     
     # Inference command

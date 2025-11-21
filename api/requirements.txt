@@ -1,0 +1,12 @@
+# FastAPI Backend Requirements
+
+# Core API
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+python-multipart==0.0.6
+
+# Existing dependencies (from main requirements.txt)
+torch>=2.0.0
+transformers>=4.30.0
+numpy>=1.24.0

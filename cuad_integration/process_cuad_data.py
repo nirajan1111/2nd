@@ -72,7 +72,7 @@ class CUADProcessor:
         
         print(f"✓ Loaded CUAD dataset version: {data.get('version', 'unknown')}")
         return data
-    
+
     def process_contract(self, contract: Dict) -> List[Dict]:
         """Process a single contract and extract QA pairs."""
         contract_title = contract['title']
